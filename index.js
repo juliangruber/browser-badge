@@ -35,9 +35,9 @@ module.exports = function (browsers) {
             var img = new Canvas.Image;
             img.src = 'data:image/png;base64,' + data;
             
-            var x = 4 + 104 * ix + (104 - img.width * 0.5 * 2) / 2;
-            var w = img.width * 0.5 * 2;
-            var h = img.height * 0.5 * 2;
+            var x = 4 + 104 * ix + (104 - img.width) / 2;
+            var w = img.width;
+            var h = img.height;
             
             ctx.drawImage(img, x, 10, w, h);
             drawVersions(ctx, browsers[name], 10 + 104 * ix);
@@ -57,7 +57,7 @@ function drawVersions (ctx, versions, x) {
         var v = versions[key];
         var y = 116 + i * 22;
         
-        ctx.font = 'bold 24px sans-serif';
+        ctx.font = 'bold 20px sans-serif';
         ctx.fillStyle = {
             'true': 'rgb(51,255,26)', // ok -> ✓ green
             'false': 'rgb(255,51,26)', // fail -> ⚑ red
@@ -69,7 +69,7 @@ function drawVersions (ctx, versions, x) {
             'pending': '-'
         }[String(v)] || '?', x, y);
         
-        ctx.font = 'normal 24px sans-serif';
+        ctx.font = 'normal 20px sans-serif';
         ctx.fillText(key, x + 24, y);
     });
 }
