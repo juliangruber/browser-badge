@@ -5,6 +5,8 @@ var createBadge = require('../');
 var fs = require('fs');
 var syntaxError = require('syntax-error');
 
+var scale = argv.scale || argv.s;
+
 var infile = argv._.shift() || argv.infile || argv.i || '-';
 var instream = infile === '-'
     ? process.stdin
@@ -28,5 +30,5 @@ instream.on('end', function () {
         console.error(e || err)
         process.exit(1);
     }
-    createBadge(browsers).pipe(outstream);
+    createBadge(browsers, { scale : scale }).pipe(outstream);
 });

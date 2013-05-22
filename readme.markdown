@@ -25,12 +25,14 @@ $ browser-badge browsers.json -o badge.png
 # usage
 
 ```
-browser-badge {infile | -i infile | -} {outfile | -o outfile | -}
+browser-badge {infile | -i infile | -} {outfile | -o outfile | -} {-s scale | -}
 
   infile should be a json object mapping browser names to version
   compatabilities
   
   outfile will be a png file with the browser badge data
+
+  scale should be a factor by which the badge will be scaled.
 ```
 
 # methods
@@ -39,7 +41,7 @@ browser-badge {infile | -i infile | -} {outfile | -o outfile | -}
 var browserBadge = require('browser-badge')
 ```
 
-## browserBadge(browsers)
+## browserBadge(browsers[, opts])
 
 Return a readable stream of png data from the browser version compatability
 object `browsers`.
@@ -47,6 +49,11 @@ object `browsers`.
 `browsers` should map browser names to maps of versions to booleans expressing
 compatbility or `"pending"` to indicate that the browser tests have not yet
 finished.
+
+`opts` can be:
+
+* `scale (Default: 1)`: The factor by which the badge will be scaled. Use `2`
+for retina readiness.
 
 # install
 
