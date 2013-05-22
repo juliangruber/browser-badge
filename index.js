@@ -4,23 +4,23 @@ var through = require('through');
 
 module.exports = function (browsers) {
     var browserNames = Object.keys(browsers);
-    var width = browserNames.length * 52 + 2;
+    var width = browserNames.length * 104 + 4;
     var height = Math.max.apply(null, browserNames.map(function (name) {
-        return Object.keys(browsers[name]).length * 11 + 58;
+        return Object.keys(browsers[name]).length * 11 * 2 + 116;
     }));
     
     var canvas = new Canvas(width, height);
     var ctx = canvas.getContext('2d');
     
     ctx.fillStyle = 'rgb(55,55,55)';
-    round(ctx, 0, 0, width, height, 8);
+    round(ctx, 0, 0, width, height, 16);
     ctx.fill();
     
     var stream = through();
     
     browserNames.forEach(function (name, ix) {
         ctx.fillStyle = 'rgb(62,62,62)';
-        round(ctx, 2 + ix * 52, 2, 50, height - 4, 8);
+        round(ctx, 4 + ix * 104, 4, 100, height - 8, 16);
         ctx.fill();
     });
     
@@ -35,12 +35,12 @@ module.exports = function (browsers) {
             var img = new Canvas.Image;
             img.src = 'data:image/png;base64,' + data;
             
-            var x = 2 + 52 * ix + (52 - img.width * 0.5) / 2;
-            var w = img.width * 0.5;
-            var h = img.height * 0.5;
+            var x = 4 + 104 * ix + (104 - img.width * 0.5 * 2) / 2;
+            var w = img.width * 0.5 * 2;
+            var h = img.height * 0.5 * 2;
             
-            ctx.drawImage(img, x, 5, w, h);
-            drawVersions(ctx, browsers[name], 5 + 52 * ix);
+            ctx.drawImage(img, x, 10, w, h);
+            drawVersions(ctx, browsers[name], 10 + 104 * ix);
             
             next(ix + 1);
         });
@@ -55,9 +55,9 @@ function drawVersions (ctx, versions, x) {
     });
     keys.forEach(function (key, i) {
         var v = versions[key];
-        var y = 58 + i * 11;
+        var y = 116 + i * 22;
         
-        ctx.font = 'bold 12px sans-serif';
+        ctx.font = 'bold 24px sans-serif';
         ctx.fillStyle = {
             'true': 'rgb(51,255,26)', // ok -> ✓ green
             'false': 'rgb(255,51,26)', // fail -> ⚑ red
@@ -69,8 +69,8 @@ function drawVersions (ctx, versions, x) {
             'pending': '-'
         }[String(v)] || '?', x, y);
         
-        ctx.font = 'normal 10px sans-serif';
-        ctx.fillText(key, x + 12, y);
+        ctx.font = 'normal 24px sans-serif';
+        ctx.fillText(key, x + 24, y);
     });
 }
 
