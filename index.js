@@ -67,7 +67,7 @@ function drawVersions (ctx, versions, x) {
             'true': '✓',
             'false': '⚑',
             'pending': '-'
-        }[String(v)] || '?', x, y);
+        }[String(v)] || '?', x + 2, y);
         
         ctx.font = 'normal 20px sans-serif';
         ctx.fillText(key, x + 24, y);
