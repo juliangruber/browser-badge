@@ -10,10 +10,10 @@
         "example" : "example"
     },
     "dependencies" : {
-        "canvas" : "~0.13.1",
-        "optimist" : "~0.3.4",
-        "syntax-error" : "~0.0.0",
-        "through" : "~0.1.4"
+        "canvas" : "~1.6.2",
+        "optimist" : "~0.6.1",
+        "syntax-error" : "~1.1.6",
+        "through" : "~2.3.8"
     },
     "repository" : {
         "type" : "git",
